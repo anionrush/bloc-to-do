@@ -1,11 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="blocToDo">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Bloc Base Project</title>
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
+    <div class="container full-scrn" ng-controller="ListCtrl">
+        <div class="row full-scrn" >
+            <div class="col-xs-4 col-xs-offset-4" >
+                <input ng-model="newTask">
+                <br>
+                <button ng-click="addTask(newTask)">Add Task</button>
+                <div ng-repeat="task in tasks">
+                    {{task.text}}
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
     <script src="/scripts/app.js"></script>
+    <script>
+        (function(){
+            angular.module('blocToDo', ["firebase"])
+        })();
+        
+        
+        (function(){
+            
+            function ListCtrl($scope, $firebaseArray){
+                var ref = new Firebase('https://bloc-to-do-onur.firebaseio.com/tasks');
+                $scope.tasks = $firebaseArray(ref);
+                
+                $scope.addTask = function(newTask){
+                    $scope.tasks.$add({
+                        text: newTask
+                    })
+                    
+                    $scope.newTask = '';
+                }
+                
+            }
+            
+            angular.module('blocToDo')
+                .controller('ListCtrl', ['$scope', '$firebaseArray', ListCtrl])
+        })();
+        
+    </script>
 </body>
 </html>
