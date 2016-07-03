@@ -6,5 +6,9 @@
 <br>
 <br>
 <div ng-repeat="task in tasks" >
-    <div class="task-style" style="">{{task.text}}</div>
+    <div class="task-style" style="" ng-show="checkTime(task)" ng-class-odd="'task-odd'">
+        {{task.text}} <button class="pull-right" style="height: 40px;" ng-click="markIncomplete(task)">Complete</button>
+    </div>
+    
+    
 </div>

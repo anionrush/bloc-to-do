@@ -16,6 +16,11 @@
     padding: 0 !important;
     margin: 0 !important;
     font-size: 150%; 
-    border-bottom: solid black;
+    height: 40px;
+    
+}
+
+.task-odd{
+    background-color: #f4eeee
 }
 

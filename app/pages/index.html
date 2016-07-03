@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container full-scrn" ng-controller="ListCtrl">
+    <div class="container full-scrn">
         <div class="row full-scrn">
             <div class="col-xs-4 col-xs-offset-4 mid-col" style="padding: 0;">
                 <div ui-view></div>
@@ -16,14 +16,14 @@
     </div>
     
     
-    
-    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
     <script src="/scripts/app.js"></script>
     <script>
+        
+        
         (function(){
             angular.module('blocToDo', ["firebase",'ui.router'])
             .config(function($stateProvider, $urlRouterProvider) {
@@ -32,7 +32,8 @@
                 $stateProvider
                     .state('/', {
                         url: "/",
-                        templateUrl: "/templates/active.html"
+                        templateUrl: "/templates/active.html",
+                        controller: "ListCtrl"
                     });
             });
         })();
@@ -45,12 +46,30 @@
                 $scope.tasks = $firebaseArray(ref);
                 
                 $scope.addTask = function(newTask){
+                    
+                    var d1 = new Date()
+                    
                     $scope.tasks.$add({
-                        text: newTask
+                        text: newTask, 
+                        date: d1.getTime(),
+                        state: "incomplete"
                     })
                     
                     $scope.newTask = '';
                 }
+                
+                $scope.checkTime = function(task){
+                    
+                    var v1 = new Date();
+                    
+                    return ((v1.getTime() - task.date < 500000) && (task.state == 'incomplete'))
+                }
+                
+                $scope.markIncomplete = function(task){
+                    task.state = "complete";
+                    $scope.checkTime(task);
+                }
+                
                 
             }
             
