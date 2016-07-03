@@ -31,10 +31,15 @@
                 
                 $stateProvider
                     .state('/', {
-                        url: "/",
-                        templateUrl: "/templates/active.html",
-                        controller: "ListCtrl"
-                    });
+                            url: "/",
+                            templateUrl: "/templates/active.html",
+                            controller: "ListCtrl"
+                        })
+                    .state('/hidden',{
+                        url:"/hidden",
+                        templateUrl: "/templates/hidden.html",
+                        controller: "ListCtrl"     
+                });
             });
         })();
         

@@ -1,0 +1,9 @@
+<h1 style="margin-left:10px;"> Completed or Expired Tasks</h1>
+
+<div ng-repeat="task in tasks" >
+    <div class="task-style" style="" ng-show="!checkTime(task)" ng-class-odd="'task-odd'">
+        {{task.text}} -- {{task.state}}
+    </div>
+    
+    
+</div>
