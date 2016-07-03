@@ -8,15 +8,9 @@
 </head>
 <body>
     <div class="container full-scrn" ng-controller="ListCtrl">
-        <div class="row full-scrn" >
-            <div class="col-xs-4 col-xs-offset-4" >
-                <input ng-model="newTask">
-                <br>
-                <button ng-click="addTask(newTask)">Add Task</button>
-                <div ng-repeat="task in tasks">
-                    {{task.text}}
-                
-                </div>
+        <div class="row full-scrn">
+            <div class="col-xs-4 col-xs-offset-4 mid-col" style="padding: 0;">
+                <div ui-view></div>
             </div>
         </div>
     </div>
@@ -25,12 +19,22 @@
     
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
     <script src="/scripts/app.js"></script>
     <script>
         (function(){
-            angular.module('blocToDo', ["firebase"])
+            angular.module('blocToDo', ["firebase",'ui.router'])
+            .config(function($stateProvider, $urlRouterProvider) {
+                $urlRouterProvider.otherwise("/");
+                
+                $stateProvider
+                    .state('/', {
+                        url: "/",
+                        templateUrl: "/templates/active.html"
+                    });
+            });
         })();
         
         

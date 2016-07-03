@@ -5,3 +5,17 @@
     padding: 0 !important;
     margin: 0 !important;
 }
+
+.mid-col {
+    background-color: #a29d9d;
+    height: 100vh; 
+}
+
+.task-style {
+    background-color: #d8d5d5;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 150%; 
+    border-bottom: solid black;
+}
+

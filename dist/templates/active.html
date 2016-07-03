@@ -1,0 +1,10 @@
+<h1 style="margin-left:10px;"> Current Tasks</h1>
+<input ng-model="newTask" style="margin-left:10px;">
+<br>
+<br>
+<button ng-click="addTask(newTask)" style="margin-left:10px;">Add Task</button>
+<br>
+<br>
+<div ng-repeat="task in tasks" >
+    <div class="task-style" style="">{{task.text}}</div>
+</div>
